@@ -138,7 +138,7 @@ open class ExpandableLabel : UILabel {
         set(text) {
             if let text = text {
                 expandedText = getExpandedTextForText(text, link: expandedAttributedLink)?.copyWithAddedFontAttribute(font)
-                self.attributedText = NSAttributedString(string: text)
+                self.attributedText = NSAttributedString(string: text, attributes: [NSFontAttributeName : self.font])
             } else {
                 self.attributedText = nil
             }
