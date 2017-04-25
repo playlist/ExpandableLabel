@@ -335,6 +335,9 @@ extension ExpandableLabel {
 
 private extension NSAttributedString {
     func hasFontAttribute() -> Bool {
+        guard (self.string.characters.count > 0) else {
+            return false
+        }
         let font = self.attribute(NSFontAttributeName, at: 0, effectiveRange: nil) as? UIFont
         return font != nil
     }
