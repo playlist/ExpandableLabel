@@ -382,6 +382,6 @@ private extension NSAttributedString {
     
     func boundingRectForWidth(_ width : CGFloat) -> CGRect {
         return self.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)),
-                                 options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
+                                 options: NSStringDrawingOptions.usesDeviceMetrics, context: nil)
     }
 }
