@@ -65,8 +65,13 @@ open class ExpandableLabel : UILabel {
     /// Set 'true' if the label should be collapsed or 'false' for expanded.
     @IBInspectable open var collapsed : Bool = true {
         didSet {
-            super.attributedText = (collapsed) ? self.collapsedText : self.expandedText
-            super.numberOfLines = (collapsed) ? self.collapsedNumberOfLines : 0
+            super.attributedText = (self.collapsed) ? self.collapsedText : self.expandedText
+            super.numberOfLines = (self.collapsed) ? self.collapsedNumberOfLines : 0
+            if (self.animated) {
+                UIView.animate(withDuration: 0.3) {
+                    self.superview?.layoutIfNeeded()
+                }
+            }
         }
     }
     
@@ -91,6 +96,9 @@ open class ExpandableLabel : UILabel {
             self.ellipsis = ellipsis?.copyWithAddedFontAttribute(font)
         }
     }
+    
+    /// Should the swap between collapsed and expanded be animated?
+    open var animated: Bool = false
     
     
     //
@@ -132,6 +140,7 @@ open class ExpandableLabel : UILabel {
         expandedAttributedLink = nil
         collapsedAttributedLink = NSAttributedString(string: "More", attributes: [NSFontAttributeName : UIFont.boldSystemFont(ofSize: font.pointSize)])
         ellipsis = NSAttributedString(string: "...")
+        self.contentMode = UIViewContentMode.top
     }
     
     open override var text: String? {
